@@ -129,7 +129,10 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: 0.3,
+              ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+            }}
             className="fixed inset-0 z-[980] glass-dark flex flex-col items-center justify-center gap-8 md:hidden"
           >
             {navLinks.map((link, i) => (

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MapPin, Calendar, Briefcase } from "lucide-react";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { experiences } from "@/data/experience";

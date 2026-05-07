@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, type ReactNode } from "react";
 import { gsap } from "@/lib/gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface ScrollRevealProps {
   children: ReactNode;

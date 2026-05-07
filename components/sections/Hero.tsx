@@ -21,7 +21,10 @@ const nameWord = {
     y: "0%",
     opacity: 1,
     skewY: 0,
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
+    transition: {
+      duration: 1,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
   },
 };
 
@@ -29,7 +32,11 @@ const nameWord = {
 const fu = (delay: number) => ({
   initial: { y: 20, opacity: 0 },
   animate: { y: 0, opacity: 1 },
-  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1], delay },
+  transition: {
+    duration: 0.7,
+    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    delay,
+  },
 });
 
 export default function Hero() {
@@ -142,8 +149,6 @@ export default function Hero() {
 
       {/* ── Main content ─────────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-col items-center text-center w-full max-w-4xl mx-auto px-5 sm:px-10 gap-5 py-28 sm:py-20">
-
-
         {/* ② Availability badge */}
         <motion.div
           {...fu(0.15)}

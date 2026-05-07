@@ -88,7 +88,7 @@ export default function Testimonials() {
                 transition={{
                   duration: 0.5,
                   delay: i * 0.07,
-                  ease: [0.16, 1, 0.3, 1],
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 }}
                 className={`glass rounded-2xl p-8 flex flex-col gap-6 hover:border-accent/30 transition-all duration-500 ${
                   i === 1 ? "md:-translate-y-4" : ""
