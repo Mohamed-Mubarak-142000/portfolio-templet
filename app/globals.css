@@ -3,25 +3,261 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #7c3aed;
+  --accent-light: #9f5ff7;
+  --accent-glow: rgba(124, 58, 237, 0.35);
+  --surface: #0a0a0f;
+  --surface-2: #111118;
+  --surface-3: #1a1a24;
+  --surface-4: #22222f;
+  --text-primary: #f0f0f5;
+  --text-secondary: #9494aa;
+  --text-muted: #555566;
+  --border: rgba(255, 255, 255, 0.07);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  overflow-x: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ─── Custom scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ─── Selection ─────────────────────────────────────────── */
+::selection {
+  background: rgba(124, 58, 237, 0.4);
+  color: #fff;
+}
+
+/* ─── Cursor hide on touch ──────────────────────────────── */
+@media (hover: none) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* ─── Glass card utility ────────────────────────────────── */
 @layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+  }
+
+  .glass-dark {
+    background: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      #fff 0%,
+      var(--accent-light) 60%,
+      var(--accent) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .glow-md {
+    box-shadow:
+      0 0 40px var(--accent-glow),
+      0 0 80px rgba(124, 58, 237, 0.15);
+  }
+
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+    }
+  }
+
+  .clip-reveal {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  .clip-reveal-full {
+    clip-path: inset(0 0 0% 0);
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* ─── Marquee pause on hover ────────────────────────────── */
+.marquee-track:hover .marquee-inner {
+  animation-play-state: paused;
+}
+
+/* ─── Loading screen ────────────────────────────────────── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Noise overlay ─────────────────────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ─── Scroll progress bar ───────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transform-origin: left;
+  z-index: 9998;
+  will-change: transform;
+}
+
+/* ─── Line draw animation ───────────────────────────────── */
+.draw-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+/* ─── Magnetic button ───────────────────────────────────── */
+.magnetic-btn {
+  cursor: none;
+  will-change: transform;
+}
+
+/* ─── Project card ──────────────────────────────────────── */
+.project-card-img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card:hover .project-card-img {
+  transform: scale(1.05);
+}
+
+/* ─── Timeline ──────────────────────────────────────────── */
+.timeline-line {
+  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+}
+
+/* ─── Floating labels ───────────────────────────────────── */
+.floating-label-group {
+  position: relative;
+}
+.floating-label-group input:focus ~ label,
+.floating-label-group input:not(:placeholder-shown) ~ label,
+.floating-label-group textarea:focus ~ label,
+.floating-label-group textarea:not(:placeholder-shown) ~ label {
+  transform: translateY(-1.5rem) scale(0.8);
+  color: var(--accent-light);
+}
+.floating-label-group label {
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left;
+}
+
+/* ─── Hero name animated gradient ──────────────────────── */
+.hero-name-gradient {
+  background: linear-gradient(
+    110deg,
+    #e9d5ff 0%,
+    #a78bfa 20%,
+    #7c3aed 42%,
+    #9f5ff7 60%,
+    #c4b5fd 80%,
+    #a78bfa 100%
+  );
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hero-name-shimmer 5s ease-in-out infinite;
+  display: block;
+}
+
+@keyframes hero-name-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ─── Hero photo spinning ring ──────────────────────────── */
+.hero-photo-ring {
+  background: conic-gradient(
+    from 0deg,
+    #7c3aed 0%,
+    #9f5ff7 25%,
+    #c4b5fd 45%,
+    transparent 50%,
+    transparent 75%,
+    #7c3aed 100%
+  );
+  animation: hero-ring-spin 4s linear infinite;
+  border-radius: 9999px;
+}
+
+@keyframes hero-ring-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
