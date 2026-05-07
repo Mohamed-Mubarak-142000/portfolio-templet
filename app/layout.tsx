@@ -16,6 +16,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/me.png",
+    apple: "/me.png",
+  },
   title: "Mohamed Mubarak — Front-End Developer",
   description:
     "Front-End Developer specialised in React JS, TypeScript, and Next.js. Currently at Innovatek building scalable kiosk and dashboard products.",
