@@ -101,16 +101,18 @@ export default function Projects() {
 
                 {/* Hover content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-white text-xs font-semibold hover:bg-accent-light transition-colors duration-300"
-                    >
-                      <ExternalLink size={12} />
-                      Live
-                    </a>
+                  <div className="flex items-center flex-wrap gap-2">
+                    {project.liveUrl !== "#" && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-white text-xs font-semibold hover:bg-accent-light transition-colors duration-300"
+                      >
+                        <ExternalLink size={12} />
+                        Live
+                      </a>
+                    )}
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -118,8 +120,19 @@ export default function Projects() {
                       className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white text-xs font-semibold hover:border-white/50 transition-colors duration-300"
                     >
                       <GithubIcon width={12} height={12} />
-                      Code
+                      GitHub
                     </a>
+                    {project.backendUrl && (
+                      <a
+                        href={project.backendUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white text-xs font-semibold hover:border-white/50 transition-colors duration-300"
+                      >
+                        <GithubIcon width={12} height={12} />
+                        Backend
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
